@@ -20,25 +20,26 @@ const navItems: NavItem[] = [
 let isMobileMenuOpen = false;
 ---
 
-<nav class="flex justify-between items-center px-8 py-4 bg-white shadow-md">
-	<div class="flex items-center gap-2">
-		<Image src={logo} alt='logo' class="h-10 w-auto"/> 
-		<span class="text-sm sm:text-lg font-bold text-gray-900">AJK Public Service Commision</span>
-	</div>
+<nav class="flex justify-between items-center px-4 sm:px-8 py-4 bg-white shadow-md relative z-50">
+    <div class="flex items-center gap-2">
+        <Image src={logo} alt='logo' class="h-8 sm:h-10 w-auto"/> 
+        <span class="text-xs sm:text-lg font-bold text-green-600 leading-tight">AJK Public Service<br class="sm:hidden"/> Commission</span>
+    </div>
 
-	<div class="hidden md:flex items-center gap-8">
-		{navItems.map((item) => (
-			<a 
-				href={item.href} 
-				class="text-gray-900 font-medium hover:text-blue-600 transition-colors"
-			>
-				{item.label}
-			</a>
-		))}
-	</div>
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex items-center gap-8">
+        {navItems.map((item) => (
+            <a 
+                href={item.href} 
+                class="text-gray-900 font-medium hover:text-blue-600 transition-colors"
+            >
+                {item.label}
+            </a>
+        ))}
+    </div>
 
-	<div class="flex items-center gap-4">
-		<div class="hidden md:flex items-center gap-2 relative">
+    <div class="flex items-center gap-4">
+        <div class="hidden md:flex items-center gap-2 relative">
 			<input
 				type="text"
 				placeholder="Search..."
@@ -53,7 +54,7 @@ let isMobileMenuOpen = false;
 		</div>
 		
 		<div class="hidden md:flex items-center gap-2">
-			<button class="px-4 py-2 text-white cursor-pointer bg-blue-600 hover:bg-blue-700 rounded-md transition-colors">
+			<button class="px-4 py-2 text-white cursor-pointer bg-green-600 hover:bg-blue-700 rounded-md transition-colors">
 				Sign In
 			</button>
 			<button class="px-4 py-2 cursor-pointer bg-gray-100 hover:bg-gray-300 border border-gray-800 rounded-md transition-colors">
@@ -61,50 +62,93 @@ let isMobileMenuOpen = false;
 			</button>
 		</div>
 
-		<button 
-			id="mobile-menu-button"
-			class="md:hidden text-2xl"
-			aria-label="Menu"
-		>
-			☰
-		</button>
-	</div>
+        <button 
+            id="mobile-menu-button"
+            class="md:hidden text-2xl p-2"
+            aria-label="Toggle Menu"
+        >
+            <span class="menu-icon">☰</span>
+        </button>
+    </div>
 </nav>
 
 <!-- Mobile Menu -->
 <div 
-	id="mobile-menu" 
-	class="hidden md:hidden fixed inset-0 bg-white z-50 p-4"
+    id="mobile-menu" 
+    class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-50 transition-all duration-300"
 >
-	<div class="flex flex-col gap-4">
-		{navItems.map((item) => (
-			<a 
-				href={item.href} 
-				class="text-gray-900 font-medium hover:text-blue-600 py-2"
-			>
-				{item.label}
-			</a>
-		))}
-		<input
-			type="text"
-			placeholder="Search..."
-			class="px-4 py-2 border border-gray-200 rounded-md"
-		/>
-		<button class="px-4 py-2 cursor-pointer text-white bg-blue-600 hover:bg-blue-700 rounded-md">
-			Sign In
-		</button>
-		<button class="px-4 py-2 cursor-pointer bg-gray-100 hover:bg-blue-700 rounded-md">
-			Register
-		</button>
-	</div>
+    <div class="bg-white h-full w-[80%] max-w-sm ml-auto p-6 transform transition-transform duration-300">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-xl font-bold">Menu</h2>
+            <button id="close-menu" class="text-2xl p-2">×</button>
+        </div>
+        
+        <div class="flex flex-col gap-6">
+            {navItems.map((item) => (
+                <a 
+                    href={item.href} 
+                    class="text-gray-900 font-medium hover:text-blue-600 text-lg"
+                >
+                    {item.label}
+                </a>
+            ))}
+            
+            <div class="relative">
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    class="w-full px-4 py-2 border border-gray-200 rounded-md"
+                />
+                <span class="absolute right-3 top-1/2 -translate-y-1/2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </span>
+            </div>
+            
+            <button class="w-full px-4 py-3 text-white bg-green-600 hover:bg-green-700 rounded-md transition-colors">
+                Sign In
+            </button>
+            <button class="w-full px-4 py-3 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-md transition-colors">
+                Register
+            </button>
+        </div>
+    </div>
 </div>
 
 <script>
-	// Mobile menu toggle functionality
-	const mobileMenuButton = document.getElementById('mobile-menu-button');
-	const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const closeMenuButton = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = mobileMenuButton?.querySelector('.menu-icon');
+    const menuContent = mobileMenu?.querySelector('div');
 
-	mobileMenuButton?.addEventListener('click', () => {
-		mobileMenu?.classList.toggle('hidden');
-	});
+    function toggleMenu(show: boolean) {
+        if (mobileMenu && menuContent) {
+            if (show) {
+                mobileMenu.classList.remove('hidden');
+                setTimeout(() => {
+                    menuContent.classList.remove('translate-x-full');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            } else {
+                menuContent.classList.add('translate-x-full');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = '';
+            }
+        }
+    }
+
+    mobileMenuButton?.addEventListener('click', () => toggleMenu(true));
+    closeMenuButton?.addEventListener('click', () => toggleMenu(false));
+    
+    // Close menu when clicking outside
+    mobileMenu?.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) {
+            toggleMenu(false);
+        }
+    });
 </script>

@@ -1,0 +1,99 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div class="top-0 left-0 right-0 z-50 bg-white shadow-md">
+  <!-- Top info bar -->
+  <div class="hidden sm:block bg-gray-100 py-1">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-wrap items-center justify-between">
+        <!-- Email section -->
+        <div class="flex items-center space-x-2">
+          <Icon name="mdi:email" class="w-5 h-5 text-green-600" />
+          <a href="mailto:info@ajkpsc.com" class="text-sm hover:text-green-600"
+            >info@ajkpsc.com</a
+          >
+        </div>
+
+        <!-- Phone and Hours section -->
+        <div class="flex items-center space-x-4">
+          <div class="flex items-center space-x-2">
+            <Icon name="mdi:phone" class="w-5 h-5 text-green-600" />
+            <a href="tel:+923xxxxxxxxx" class="text-sm hover:text-green-600"
+              >+92 3XX XXXXXXX</a
+            >
+          </div>
+
+          <!-- Hours dropdown -->
+          <div class="relative group">
+            <button
+              class="flex items-center space-x-2 text-sm bg-green-600 text-white px-3 py-1 rounded cursor-pointer hover:bg-green-700"
+            >
+              <Icon name="mdi:clock" class="w-5 h-5" />
+              <span>Open Today: 9AM - 5PM</span>
+            </button>
+            <div
+              class="hidden group-hover:block absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50"
+            >
+              <div class="px-4 py-2">
+                <p class="text-sm font-semibold">Working Hours:</p>
+                <p class="text-xs">Monday-Friday: 9AM - 5PM</p>
+                <p class="text-xs">Saturday,Sunday: Closed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Moving headlines -->
+  <div class="bg-green-600 text-white overflow-hidden hidden sm:block">
+    <div class="marquee">
+      <span class="mx-8 fixed text-red-500 blinking-text">Important Notice</span
+      >
+      <div class="marquee-content">
+        <span class="mx-8">PSC Exam Schedule Updated</span>
+        <span class="mx-8">New Positions Available for Public Service</span>
+        <span class="mx-8">Last Date for Applications Extended</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .marquee {
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .marquee-content {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .blinking-text {
+    animation: blink 1s step-start infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .marquee-content {
+      animation-duration: 15s;
+    }
+  }
+</style>
