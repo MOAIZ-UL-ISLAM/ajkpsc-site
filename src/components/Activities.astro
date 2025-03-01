@@ -1,0 +1,122 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section class="min-h-[70vh] w-full py-20 bg-gradient-to-b from-slate-600 to-slate-800">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white relative">
+            Major Activities of AJK Public Service Commission
+            <span class="block w-24 h-1 bg-blue-500 mx-auto mt-4"></span>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Requisition Card -->
+            <div class="group perspective">
+                <div class="relative transform transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                    <!-- Front -->
+                    <div class="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-xl">
+                        <div class="flex flex-col items-center">
+                            <div class="bg-blue-100 p-6 rounded-full mb-6 group-hover:scale-110 transition-transform">
+                                <Icon name="mdi:file-document-outline" class="w-10 h-10 text-blue-600" />
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">Requisition</h3>
+                            <p class="text-gray-600 text-center">Click to learn more</p>
+                        </div>
+                    </div>
+                    <!-- Back -->
+                    <div class="absolute inset-0 h-full w-full [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                        <div class="bg-blue-600 p-8 rounded-xl shadow-xl h-full flex flex-col justify-center items-center">
+                            <h4 class="text-xl font-bold text-white mb-4">Requisition Process</h4>
+                            <ul class="text-white/90 text-center space-y-2">
+                                <li>• Advertisement Creation</li>
+                                <li>• Position Requirements</li>
+                                <li>• Document Verification</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications Card -->
+            <div class="group perspective">
+                <div class="relative transform transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                    <div class="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-xl">
+                        <div class="flex flex-col items-center">
+                            <div class="bg-green-100 p-6 rounded-full mb-6 group-hover:scale-110 transition-transform">
+                                <Icon name="mdi:application-outline" class="w-10 h-10 text-green-600" />
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">Applications</h3>
+                            <p class="text-gray-600 text-center">Click to learn more</p>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 h-full w-full [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                        <div class="bg-green-600 p-8 rounded-xl shadow-xl h-full flex flex-col justify-center items-center">
+                            <h4 class="text-xl font-bold text-white mb-4">Application Process</h4>
+                            <ul class="text-white/90 text-center space-y-2">
+                                <li>• Online Submission</li>
+                                <li>• Document Review</li>
+                                <li>• Status Tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Procedure Card -->
+            <div class="group perspective">
+                <div class="relative transform transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                    <div class="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-xl">
+                        <div class="flex flex-col items-center">
+                            <div class="bg-purple-100 p-6 rounded-full mb-6 group-hover:scale-110 transition-transform">
+                                <Icon name="mdi:clipboard-check-outline" class="w-10 h-10 text-purple-600" />
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">Examinations</h3>
+                            <p class="text-gray-600 text-center">Click to learn more</p>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 h-full w-full [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                        <div class="bg-purple-600 p-8 rounded-xl shadow-xl h-full flex flex-col justify-center items-center">
+                            <h4 class="text-xl font-bold text-white mb-4">Examination Process</h4>
+                            <ul class="text-white/90 text-center space-y-2">
+                                <li>• Test Scheduling</li>
+                                <li>• Interview Rounds</li>
+                                <li>• Result Announcement</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rules Card -->
+            <div class="group perspective">
+                <div class="relative transform transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                    <div class="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-xl">
+                        <div class="flex flex-col items-center">
+                            <div class="bg-orange-100 p-6 rounded-full mb-6 group-hover:scale-110 transition-transform">
+                                <Icon name="mdi:scale-balance" class="w-10 h-10 text-orange-600" />
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-3">Litigation & Appeals</h3>
+                            <p class="text-gray-600 text-center">Click to learn more</p>
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 h-full w-full [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                        <div class="bg-orange-600 p-8 rounded-xl shadow-xl h-full flex flex-col justify-center items-center">
+                            <h4 class="text-xl font-bold text-white mb-4">Legal Process</h4>
+                            <ul class="text-white/90 text-center space-y-2">
+                                <li>• Case Reviews</li>
+                                <li>• Appeal Process</li>
+                                <li>• Final Verdicts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .perspective {
+        perspective: 1000px;
+    }
+</style>

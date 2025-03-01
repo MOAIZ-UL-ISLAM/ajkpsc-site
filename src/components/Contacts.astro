@@ -1,0 +1,60 @@
+---
+import forestbg from '../assets/bg-forest.jpg';
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="relative h-[80vh] w-full">
+    <!-- Background image with overlay -->
+    <div class="absolute inset-0 z-0">
+        <Image
+            src={forestbg}
+            alt="Contact background"
+            class="w-full h-full object-cover"
+            width={1920}
+            height={1080}
+        />
+        <div class="absolute inset-0 bg-black/50"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 container mx-auto px-4 py-16 h-full">
+        <div class="text-center text-white mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Suggestions & Complaints</h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto">
+                We value your feedback and are here to assist you. Feel free to reach out through any of the following channels.
+            </p>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <!-- Phone Card -->
+            <div class="bg-white/10 backdrop-blur-md p-6 rounded-lg hover:scale-105 transition-transform duration-300 transform hover:shadow-xl">
+                <Icon name="mdi:phone" class="w-12 h-12 text-white mx-auto mb-4" />
+                <h3 class="text-white text-xl font-semibold mb-2">Call on</h3>
+                <p class="text-white/90">+92 XX XXXXXXX</p>
+            </div>
+
+            <!-- Email Card -->
+            <div class="bg-white/10 backdrop-blur-md p-6 rounded-lg hover:scale-105 transition-transform duration-300 transform hover:shadow-xl">
+                <Icon name="mdi:email" class="w-12 h-12 text-white mx-auto mb-4" />
+                <h3 class="text-white text-xl font-semibold mb-2">Mail at</h3>
+                <p class="text-white/90">info@xyz.gov.pk</p>
+            </div>
+
+            <!-- Office Hours Card -->
+            <div class="bg-white/10 backdrop-blur-md p-6 rounded-lg hover:scale-105 transition-transform duration-300 transform hover:shadow-xl">
+                <Icon name="mdi:clock" class="w-12 h-12 text-white mx-auto mb-4" />
+                <h3 class="text-white text-xl font-semibold mb-2">Office hrs</h3>
+                <p class="text-white/90">09am to 05pm</p>
+            </div>
+
+            <!-- Fax Card -->
+            <div class="bg-white/10 backdrop-blur-md p-6 rounded-lg hover:scale-105 transition-transform duration-300 transform hover:shadow-xl">
+                <Icon name="mdi:fax" class="w-12 h-12 text-white mx-auto mb-4" />
+                <h3 class="text-white text-xl font-semibold mb-2">Fax #</h3>
+                <p class="text-white/90">+92-XX-XXXXXXX</p>
+            </div>
+        </div>
+    </div>
+</section></div>

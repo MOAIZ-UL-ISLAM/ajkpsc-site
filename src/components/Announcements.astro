@@ -1,0 +1,99 @@
+---
+import {  Icon}  from 'astro-icon/components';
+
+// Sample announcement data
+const announcements = [
+    {
+        date: 'June 15, 2023',
+        title: 'New Job Positions Available',
+        description: 'Multiple positions open for Assistant Directors and Deputy Directors in various departments.',
+        icon: 'mdi:briefcase-outline'
+    },
+    {
+        date: 'June 10, 2023',
+        title: 'Exam Schedule Released',
+        description: 'The schedule for upcoming competitive examinations has been published. Check eligibility criteria.',
+        icon: 'mdi:calendar-clock'
+    },
+    {
+        date: 'June 5, 2023',
+        title: 'Document Verification',
+        description: 'Document verification process for recently selected candidates will begin next week.',
+        icon: 'mdi:file-document-outline'
+    },
+    {
+        date: 'May 30, 2023',
+        title: 'Interview Results',
+        description: 'Results for the recent interview phase have been announced. Visit the results section.',
+        icon: 'mdi:trophy-outline'
+    },
+    {
+        date: 'May 25, 2023',
+        title: 'Application Deadline Extended',
+        description: 'The deadline for submitting applications has been extended by two weeks.',
+        icon: 'mdi:clock-outline'
+    },
+    {
+        date: 'May 20, 2023',
+        title: 'New Test Centers Added',
+        description: 'Additional test centers have been established in various districts.',
+        icon: 'mdi:map-marker-outline'
+    }
+];
+---
+
+<section class="w-full py-16 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12 animate-fade-in" data-aos="fade-down">
+                        <h2 class="text-4xl font-bold text-gray-900 mb-4">Latest Announcements</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">
+                                Stay updated with our latest news, updates, and important announcements.
+                        </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {announcements.map(announcement => (
+                                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                                        <div class="p-6 cursor-pointer hover:bg-gray-200 flex flex-col h-full">
+                                                <div class="flex items-center justify-between mb-3">
+                                                        <div class="text-emerald-600 text-sm border-b-2 border-l-2 p-1 font-semibold">
+                                                                {announcement.date}
+                                                        </div>
+                                                        <Icon name={announcement.icon} class="w-6 h-6 text-emerald-600" />
+                                                </div>
+                                                
+                                                <h3 class="text-xl font-bold text-gray-900 mb-4">
+                                                        {announcement.title}
+                                                </h3>
+                                                
+                                                <p class="text-gray-600 mb-6 flex-grow">
+                                                        {announcement.description}
+                                                </p>
+                                                
+                                                <button class="inline-flex items-center cursor-pointer hover:bg-gray-700 px-4  py-2 rounded  text-emerald-600 hover:text-emerald-700 transition-colors duration-200">
+                                                        <span class="mr-2">View Details</span>
+                                                        <Icon name="mdi:chevron-right" class="w-5 h-5" />
+                                                </button>
+                                        </div>
+                                </div>
+                        ))}
+                </div>
+        </div>
+</section>
+
+<style>
+        @keyframes fade-in {
+                from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                }
+                to {
+                        opacity: 1;
+                        transform: translateY(0);
+                }
+        }
+
+        .animate-fade-in {
+                animation: fade-in 0.6s ease-out forwards;
+        }
+</style>
