@@ -1,154 +1,285 @@
 ---
-import Image from 'astro/components/Image.astro';
-import logo from '../assets/logo.png';
-// Add TypeScript interface for navigation items
-interface NavItem {
-	label: string;
-	href: string;
+import Image from "astro/components/Image.astro";
+import logo from "../assets/logo.png";
+
+interface DropdownItem {
+  label: string;
+  href: string;
 }
 
-// Define navigation items
+interface NavItem {
+  label: string;
+  href: string;
+  dropdown?: DropdownItem[];
+}
+
 const navItems: NavItem[] = [
-	{ label: 'Home', href: '/' },
-	{ label: 'About', href: '/about' },
-	{ label: 'Downloads', href: '/downloads' },
-	{ label: 'FAQs', href: '/faq' },
-	{ label: 'Contact', href: '/contact' },
+  { label: "Home", href: "/" },
+  {
+    label: "About",
+    href: "/about",
+    dropdown: [
+      { label: "Organizational Chart", href: "/about/org-chart" },
+      { label: "About PSC", href: "/about/psc" },
+      { label: "Ex-Chairmen AJK PSC", href: "/about/ex-chairmen" },
+      { label: "Composition of Commission", href: "/about/composition" },
+    ],
+  },
+  {
+    label: "Downloads",
+    href: "/downloads",
+    dropdown: [
+      { label: "syllabus", href: "/downloads/syllabus" },
+      { label: "Sample Papers", href: "/downloads/sample-papers" },
+      { label: "Application Form", href: "/downloads/application-form" },
+      { label: "Tenders", href: "/downloads/tenders" },
+    ],
+  },
+  { label: "News", href: "/news",
+  dropdown: [
+      { label: "Latest News", href: "/news/latest-news" },
+      { label: "Schedules", href: "/news/schedule" },
+      { label: "Policy", href: "/news/policy" },
+      
+    ],
+   },
+  { label: "Gallery", href: "/gallery" },
+  { label: "FAQs", href: "/faq" },
+  { label: "Contact", href: "/contact" },
 ];
 
-// Add state for mobile menu (you'll need to handle this with a client-side script)
 let isMobileMenuOpen = false;
 ---
 
-<nav class="flex justify-between items-center px-4 sm:px-8 py-4 bg-white shadow-md relative z-50">
-    <div class="flex items-center gap-2">
-        <Image src={logo} alt='logo' class="h-8 sm:h-10 w-auto"/> 
-        <span class="text-xs sm:text-lg font-bold text-green-600 leading-tight">AJK Public Service<br class="sm:hidden"/> Commission</span>
-    </div>
+<nav
+  class="flex justify-between items-center px-4 sm:px-8 py-4 bg-white shadow-md relative z-50"
+>
+  <div class="flex items-center gap-2">
+    <Image src={logo} alt="logo" class="h-8 sm:h-10 w-auto" />
+    <span class="text-xs sm:text-lg font-bold text-green-600 leading-tight"
+      >AJK Public Service<br class="sm:hidden" /> Commission</span
+    >
+  </div>
 
-    <!-- Desktop Navigation -->
-    <div class="hidden md:flex items-center gap-8">
-        {navItems.map((item) => (
-            <a 
-                href={item.href} 
-                class="text-gray-900 font-medium hover:text-blue-600 transition-colors"
-            >
-                {item.label}
-            </a>
-        ))}
-    </div>
+  <!-- Desktop Navigation -->
+  <div class="hidden md:flex items-center gap-8">
+    {
+      navItems.map((item) => (
+        <div class="relative group">
+          <a
+            href={item.href}
+            class="text-gray-900 font-medium hover:text-blue-600 transition-colors flex items-center gap-1"
+          >
+            {item.label}
+            {item.dropdown && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            )}
+          </a>
+          {item.dropdown && (
+            <div class="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div class="py-2">
+                {item.dropdown.map((dropdownItem) => (
+                  <a
+                    href={dropdownItem.href}
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    {dropdownItem.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      ))
+    }
+  </div>
 
-    <div class="flex items-center gap-4">
-        <div class="hidden md:flex items-center gap-2 relative">
-			<input
-				type="text"
-				placeholder="Search..."
-				class="pl-10 pr-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-			/>
-			<span class="absolute left-3 top-1/2 -translate-y-1/2">
-				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
-					<circle cx="11" cy="11" r="8"></circle>
-					<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-				</svg>
-			</span>
-		</div>
-		
-		<div class="hidden md:flex items-center gap-2">
-			<button class="px-4 py-2 text-white cursor-pointer bg-green-600 hover:bg-blue-700 rounded-md transition-colors">
-				Sign In
-			</button>
-			<button class="px-4 py-2 cursor-pointer bg-gray-100 hover:bg-gray-300 border border-gray-800 rounded-md transition-colors">
-				Register
-			</button>
-		</div>
-
-        <button 
-            id="mobile-menu-button"
-            class="md:hidden text-2xl p-2"
-            aria-label="Toggle Menu"
+  <div class="flex items-center gap-4">
+    <div class="hidden md:flex items-center gap-2 relative">
+      <input
+        type="text"
+        placeholder="Search..."
+        class="pl-8 pr-4 py-2 border w-42 border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <span class="absolute left-3 top-1/2 -translate-y-1/2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="text-gray-400"
         >
-            <span class="menu-icon">☰</span>
-        </button>
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </span>
     </div>
+
+    <div class="hidden md:flex items-center gap-2">
+      <button
+        class="px-4 py-2 text-white cursor-pointer bg-green-600 hover:bg-green-700 rounded-md transition-colors"
+      >
+        Sign In
+      </button>
+      <button
+        class="px-4 py-2 cursor-pointer bg-gray-100 hover:bg-gray-300 border border-gray-800 rounded-md transition-colors"
+      >
+        Register
+      </button>
+    </div>
+
+    <button
+      id="mobile-menu-button"
+      class="md:hidden text-2xl p-2"
+      aria-label="Toggle Menu"
+    >
+      <span class="menu-icon">☰</span>
+    </button>
+  </div>
 </nav>
 
 <!-- Mobile Menu -->
-<div 
-    id="mobile-menu" 
-    class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-50 transition-all duration-300"
+<div
+  id="mobile-menu"
+  class="hidden md:hidden overflow-scroll fixed inset-0 bg-black bg-opacity-50 z-50 transition-all duration-300"
 >
-    <div class="bg-white h-full w-[80%] max-w-sm ml-auto p-6 transform transition-transform duration-300">
-        <div class="flex justify-between items-center mb-8">
-            <h2 class="text-xl font-bold">Menu</h2>
-            <button id="close-menu" class="text-2xl p-2">×</button>
-        </div>
-        
-        <div class="flex flex-col gap-6">
-            {navItems.map((item) => (
-                <a 
-                    href={item.href} 
-                    class="text-gray-900 font-medium hover:text-blue-600 text-lg"
-                >
-                    {item.label}
-                </a>
-            ))}
-            
-            <div class="relative">
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    class="w-full px-4 py-2 border border-gray-200 rounded-md"
-                />
-                <span class="absolute right-3 top-1/2 -translate-y-1/2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </span>
-            </div>
-            
-            <button class="w-full px-4 py-3 text-white bg-green-600 hover:bg-green-700 rounded-md transition-colors">
-                Sign In
-            </button>
-            <button class="w-full px-4 py-3 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-md transition-colors">
-                Register
-            </button>
-        </div>
+  <div
+    class="bg-white h-full w-[80%] max-w-sm ml-auto p-6 transform transition-transform duration-300"
+  >
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-xl font-bold text-green-500">Menu</h2>
+      <button id="close-menu" class="text-2xl p-2">×</button>
     </div>
+
+    <div class="flex flex-col gap-6">
+      {
+        navItems.map((item) => (
+          <div class="space-y-2">
+            <a
+              href={item.href}
+              class="text-gray-900 font-medium hover:text-blue-600 text-lg flex items-center justify-between"
+            >
+              {item.label}
+              {item.dropdown && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              )}
+            </a>
+            {item.dropdown && (
+              <div class="pl-4 space-y-2 border-l-2 border-gray-200">
+                {item.dropdown.map((dropdownItem) => (
+                  <a
+                    href={dropdownItem.href}
+                    class="block text-gray-600 hover:text-blue-600 text-base"
+                  >
+                    {dropdownItem.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        ))
+      }
+
+      <div class="relative">
+        <input
+          type="text"
+          placeholder="Search..."
+          class="w-full px-4 py-2 border border-gray-200 rounded-md"
+        />
+        <span class="absolute right-3 top-1/2 -translate-y-1/2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-gray-400"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </span>
+      </div>
+
+      <button
+        class="w-full px-4 py-3 text-white bg-green-600 hover:bg-green-700 rounded-md transition-colors"
+      >
+        Sign In
+      </button>
+      <button
+        class="w-full px-4 py-3 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-md transition-colors"
+      >
+        Register
+      </button>
+    </div>
+  </div>
 </div>
 
 <script>
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const closeMenuButton = document.getElementById('close-menu');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = mobileMenuButton?.querySelector('.menu-icon');
-    const menuContent = mobileMenu?.querySelector('div');
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const closeMenuButton = document.getElementById("close-menu");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const menuIcon = mobileMenuButton?.querySelector(".menu-icon");
+  const menuContent = mobileMenu?.querySelector("div");
 
-    function toggleMenu(show: boolean) {
-        if (mobileMenu && menuContent) {
-            if (show) {
-                mobileMenu.classList.remove('hidden');
-                setTimeout(() => {
-                    menuContent.classList.remove('translate-x-full');
-                }, 10);
-                document.body.style.overflow = 'hidden';
-            } else {
-                menuContent.classList.add('translate-x-full');
-                setTimeout(() => {
-                    mobileMenu.classList.add('hidden');
-                }, 300);
-                document.body.style.overflow = '';
-            }
-        }
+  function toggleMenu(show: boolean) {
+    if (mobileMenu && menuContent) {
+      if (show) {
+        mobileMenu.classList.remove("hidden");
+        setTimeout(() => {
+          menuContent.classList.remove("translate-x-full");
+        }, 10);
+        document.body.style.overflow = "hidden";
+      } else {
+        menuContent.classList.add("translate-x-full");
+        setTimeout(() => {
+          mobileMenu.classList.add("hidden");
+        }, 300);
+        document.body.style.overflow = "";
+      }
     }
+  }
 
-    mobileMenuButton?.addEventListener('click', () => toggleMenu(true));
-    closeMenuButton?.addEventListener('click', () => toggleMenu(false));
-    
-    // Close menu when clicking outside
-    mobileMenu?.addEventListener('click', (e) => {
-        if (e.target === mobileMenu) {
-            toggleMenu(false);
-        }
-    });
+  mobileMenuButton?.addEventListener("click", () => toggleMenu(true));
+  closeMenuButton?.addEventListener("click", () => toggleMenu(false));
+
+  // Close menu when clicking outside
+  mobileMenu?.addEventListener("click", (e) => {
+    if (e.target === mobileMenu) {
+      toggleMenu(false);
+    }
+  });
 </script>
