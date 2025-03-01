@@ -35,14 +35,15 @@ const navItems: NavItem[] = [
       { label: "Tenders", href: "/downloads/tenders" },
     ],
   },
-  { label: "News", href: "/news",
-  dropdown: [
+  {
+    label: "News",
+    href: "/news",
+    dropdown: [
       { label: "Latest News", href: "/news/latest-news" },
       { label: "Schedules", href: "/news/schedule" },
       { label: "Policy", href: "/news/policy" },
-      
     ],
-   },
+  },
   { label: "Gallery", href: "/gallery" },
   { label: "FAQs", href: "/faq" },
   { label: "Contact", href: "/contact" },
@@ -158,26 +159,26 @@ let isMobileMenuOpen = false;
 <!-- Mobile Menu -->
 <div
   id="mobile-menu"
-  class="hidden md:hidden overflow-scroll fixed inset-0 bg-black bg-opacity-50 z-50 transition-all duration-300"
+  class="hidden md:hidden h-full overflow-y-scroll fixed inset-0 bg-black bg-opacity-50 z-50 transition-all duration-300"
 >
   <div
-    class="bg-white h-full w-[80%] max-w-sm ml-auto p-6 transform transition-transform duration-300"
+    class="bg-white w-[100%] h-auto max-w-sm ml-auto p-6 transform transition-transform duration-300"
   >
     <div class="flex justify-between items-center mb-8">
       <h2 class="text-xl font-bold text-green-500">Menu</h2>
-      <button id="close-menu" class="text-2xl p-2">×</button>
+      <button id="close-menu" class="text-2xl p-2">X</button>
     </div>
 
     <div class="flex flex-col gap-6">
       {
-        navItems.map((item) => (
+        navItems.map((item, index) => (
           <div class="space-y-2">
-            <a
-              href={item.href}
-              class="text-gray-900 font-medium hover:text-blue-600 text-lg flex items-center justify-between"
-            >
-              {item.label}
-              {item.dropdown && (
+            {item.dropdown ? (
+              <button
+                data-dropdown-toggle={`dropdown-${index}`}
+                class="w-full text-left text-gray-900 font-medium hover:text-blue-600 text-lg flex items-center justify-between"
+              >
+                {item.label}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -188,13 +189,25 @@ let isMobileMenuOpen = false;
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
+                  class="transition-transform duration-200"
                 >
                   <path d="m6 9 6 6 6-6" />
                 </svg>
-              )}
-            </a>
+              </button>
+            ) : (
+              <a
+                href={item.href}
+                class="block text-gray-900 font-medium hover:text-blue-600 text-lg"
+              >
+                {item.label}
+              </a>
+            )}
+
             {item.dropdown && (
-              <div class="pl-4 space-y-2 border-l-2 border-gray-200">
+              <div
+                id={`dropdown-${index}`}
+                class="hidden pl-4 space-y-2 border-l-2 border-gray-200"
+              >
                 {item.dropdown.map((dropdownItem) => (
                   <a
                     href={dropdownItem.href}
@@ -249,37 +262,75 @@ let isMobileMenuOpen = false;
 </div>
 
 <script>
-  const mobileMenuButton = document.getElementById("mobile-menu-button");
-  const closeMenuButton = document.getElementById("close-menu");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const menuIcon = mobileMenuButton?.querySelector(".menu-icon");
-  const menuContent = mobileMenu?.querySelector("div");
+  class MobileNavigation {
+    private mobileMenuButton: HTMLElement | null;
+    private closeMenuButton: HTMLElement | null;
+    private mobileMenu: HTMLElement | null;
+    private menuIcon: Element | null;
+    private menuContent: Element | null;
+    private dropdownButtons: NodeListOf<Element>;
 
-  function toggleMenu(show: boolean) {
-    if (mobileMenu && menuContent) {
-      if (show) {
-        mobileMenu.classList.remove("hidden");
-        setTimeout(() => {
-          menuContent.classList.remove("translate-x-full");
-        }, 10);
-        document.body.style.overflow = "hidden";
-      } else {
-        menuContent.classList.add("translate-x-full");
-        setTimeout(() => {
-          mobileMenu.classList.add("hidden");
-        }, 300);
-        document.body.style.overflow = "";
+    constructor() {
+      this.mobileMenuButton = document.getElementById("mobile-menu-button");
+      this.closeMenuButton = document.getElementById("close-menu");
+      this.mobileMenu = document.getElementById("mobile-menu");
+      this.menuIcon = this.mobileMenuButton?.querySelector(".menu-icon");
+      this.menuContent = this.mobileMenu?.querySelector("div");
+      this.dropdownButtons = document.querySelectorAll(
+        "[data-dropdown-toggle]"
+      );
+
+      this.init();
+    }
+
+    init() {
+      this.mobileMenuButton?.addEventListener("click", () =>
+        this.toggleMenu(true)
+      );
+      this.closeMenuButton?.addEventListener("click", () =>
+        this.toggleMenu(false)
+      );
+      this.mobileMenu?.addEventListener("click", (e) => {
+        if (e.target === this.mobileMenu) {
+          this.toggleMenu(false);
+        }
+      });
+
+      // Initialize dropdown toggles
+      this.dropdownButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          e.preventDefault();
+          const dropdownId = button.getAttribute("data-dropdown-toggle");
+          const dropdown = document.getElementById(dropdownId!);
+          const arrow = button.querySelector("svg");
+
+          if (dropdown) {
+            dropdown.classList.toggle("hidden");
+            arrow?.classList.toggle("rotate-180");
+          }
+        });
+      });
+    }
+
+    toggleMenu(show: boolean) {
+      if (this.mobileMenu && this.menuContent) {
+        if (show) {
+          this.mobileMenu.classList.remove("hidden");
+          setTimeout(() => {
+            this.menuContent.classList.remove("translate-x-full");
+          }, 10);
+          document.body.style.overflow = "hidden";
+        } else {
+          this.menuContent.classList.add("translate-x-full");
+          setTimeout(() => {
+            this.mobileMenu.classList.add("hidden");
+          }, 300);
+          document.body.style.overflow = "";
+        }
       }
     }
   }
 
-  mobileMenuButton?.addEventListener("click", () => toggleMenu(true));
-  closeMenuButton?.addEventListener("click", () => toggleMenu(false));
-
-  // Close menu when clicking outside
-  mobileMenu?.addEventListener("click", (e) => {
-    if (e.target === mobileMenu) {
-      toggleMenu(false);
-    }
-  });
+  // Initialize mobile navigation
+  new MobileNavigation();
 </script>
