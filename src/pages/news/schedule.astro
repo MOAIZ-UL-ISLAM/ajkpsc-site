@@ -1,0 +1,96 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout seo={{ title: "schdeule" }}>
+  <div class="max-w-4xl mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-8 text-center">Test Schedule</h1>
+    <div class="space-y-6">
+      {
+        [
+          {
+            date: "February 28, 2025",
+            day: "Friday",
+            title: "MCQs test for Revenue Officer",
+          },
+          {
+            date: "January 27, 2025",
+            day: "Monday",
+            title: "Written Exam for the Post of Section Officer Law",
+          },
+          {
+            date: "January 14, 2025",
+            day: "Tuesday",
+            title: "MCQ's Test for the posts of Librarian",
+          },
+          {
+            date: "December 24, 2024",
+            day: "Tuesday",
+            title:
+              "Interview for the posts of Statistical officer, Headmistress, Senior Teacher(Social welfare)",
+          },
+          {
+            date: "December 2, 2024",
+            day: "Monday",
+            title: "MCQs Test for Lecturers Postponed due to Court Stay Order",
+          },
+          {
+            date: "November 9, 2024",
+            day: "Saturday",
+            title:
+              "MCQ's Test for revenue officer Postponed due to court stay order",
+          },
+          {
+            date: "October 28, 2024",
+            day: "Monday",
+            title: "Written Exam for Tehsil Mufti",
+          },
+          {
+            date: "September 24, 2024",
+            day: "Tuesday",
+            title:
+              "Interview Schedule CMO, Assistant Eng, Electro Medical, Senior Auditor",
+          },
+          {
+            date: "September 11, 2024",
+            day: "Wednesday",
+            title: "MCQs Test for Headmistress,SST",
+          },
+        ].map((event) => (
+          <div class="border rounded-lg p-4 shadow hover:shadow-lg transition-shadow">
+            <div class="text-sm text-gray-600">
+              {event.day}, {event.date}
+            </div>
+            <h2 class="text-lg font-semibold mt-1">
+              {event.title}{" "}
+              <span class="text-sm text-red-600 blinking bg-amber-300 p-1 rounded-2xl ">
+                new
+              </span>
+            </h2>
+            <button class="mt-2 text-blue-600 hover:text-blue-800">
+              Details
+            </button>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <style>
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .blinking {
+      animation: blink 1s infinite;
+    }
+  </style>
+</Layout>

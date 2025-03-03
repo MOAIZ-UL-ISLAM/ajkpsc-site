@@ -1,0 +1,159 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// Define interface for syllabus data
+interface SyllabusItem {
+    title: string;
+    downloads: number;
+    description: string;
+}
+
+// Move data to a separate array
+const syllabusData: SyllabusItem[] = [
+    {
+        title: "Syllabus for ASP/Asst.Commissioner /Section Officer /Project Manager",
+        downloads: 2387808,
+        description: "Complete syllabus for Assistant Registrar position including all subjects and topics.",
+    },
+    {
+        title: "Syllabus for Subject Specialist, Senior Teacher General",
+        downloads: 9989,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },
+    {
+        title: "Syllabus for Headmaster/Headmistress",
+        downloads: 8978,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for General Ability Test",
+        downloads: 8587,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for Tehsildar",
+        downloads: 9876,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for ASI",
+        downloads: 765,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for Computer Instructor",
+        downloads: 6578,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for District Education Officer/Dy. Director B-18 and Deputy District Education Officer/Ast. Dir B-17",
+        downloads: 7659,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for Assistant Education Officer B-16",
+        downloads: 2321,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for Naib-Tehsildar",
+        downloads: 1344,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for Civil Judge",
+        downloads: 245,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for  Forest Rangers",
+        downloads: 776453,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },
+    {
+        title: "Syllabus for Assistant Director Ehtisab Bureau",
+        downloads: 6743,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for  Assistant Conservator of Forest",
+        downloads: 656543,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus forSenior Teacher Science and Biology",
+        downloads: 7865,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for Forest Persecutor",
+        downloads: 6754,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for Senior Auditor",
+        downloads: 340,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },
+    {
+        title: "Syllabus for Tehsil Qazi",
+        downloads: 554,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for Research Officer (Central Design Office))",
+        downloads: 7675,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for  Prosecuting Inspector",
+        downloads: 1524,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for Tehsil Mufti",
+        downloads: 4512,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for  Program Officer,Programmer,Software Engineer",
+        downloads: 97326,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus for Mufti (Fiqa e Jafria)",
+        downloads: 68237,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },{
+        title: "Syllabus forSection Officer Law",
+        downloads: 7621,
+        description: "Complete syllabus for Assistant Director position including all subjects and topics.",
+    },
+    // Add all other items here...
+];
+const DownloadIcon = `
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 mr-2"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+    >
+        <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+        />
+    </svg>
+`;
+---
+
+<Layout seo={{ title: "Syllabus" }}>
+    <div class="container mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold mb-6">
+            Below is the list of all downloads available:
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6">
+            {
+            syllabusData.map((item) => (
+                <div class="bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-xl p-6 mb-4 hover:shadow-xl transition-all duration-300">
+                <div class="flex flex-col mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">{item.title}</h3>
+                    <span class="text-sm text-emerald-600 font-medium">
+                    {item.downloads.toLocaleString()} downloads so for
+                    </span>
+                </div>
+                <p class="text-gray-600 text-sm mb-6">{item.description}</p>
+                <button class="flex cursor-pointer items-center bg-amber-700 text-white px-4 py-2 rounded-lg hover:bg-amber-800 transition-colors duration-300">
+                    <Fragment set:html={DownloadIcon} />
+                    <span class="font-medium">Download Syllabus</span>
+                </button>
+                </div>
+            ))
+            }
+        </div>
+    </div>
+</Layout>

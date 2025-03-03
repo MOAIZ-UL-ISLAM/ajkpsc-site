@@ -1,0 +1,241 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// Sample news data - replace with your actual data source
+const newsItems = [
+  {
+    id: 1,
+    title: "AJKPSC Announces New Examination Schedule for 2025",
+    category: "Announcement",
+    date: "March 1, 2025",
+    summary: "The Azad Jammu and Kashmir Public Service Commission has released the examination schedule for all posts advertised in January 2025.",
+    image: "/images/news/exam-schedule.jpg",
+    featured: true
+  },
+  {
+    id: 2,
+    title: "Results Declared for Assistant Director Examination",
+    category: "Results",
+    date: "February 25, 2025",
+    summary: "Results for the Assistant Director examination held in January have been announced. Candidates can check their results online.",
+    image: "/images/news/results.jpg",
+    featured: true
+  },
+  {
+    id: 3,
+    title: "Interview Schedule for Lecturer Positions Released",
+    category: "Schedule",
+    date: "February 20, 2025",
+    summary: "The commission has published the interview schedule for lecturer positions in various subjects.",
+    image: "/images/news/interview.jpg",
+    featured: false
+  },
+  {
+    id: 4,
+    title: "New Online Application System Launched",
+    category: "Technology",
+    date: "February 15, 2025",
+    summary: "AJKPSC has launched a new digital application system to streamline the application process for all candidates.",
+    image: "/images/news/digital.jpg",
+    featured: false
+  },
+  {
+    id: 5,
+    title: "Extension in Application Deadline for Civil Judge Positions",
+    category: "Update",
+    date: "February 10, 2025",
+    summary: "The commission has extended the application deadline for Civil Judge positions due to high demand.",
+    image: "/images/news/extension.jpg",
+    featured: false
+  }
+];
+---
+
+<Layout seo={{ title: "Latest News - AJKPSC" }}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 mb-10 text-white">
+      <h1 class="text-4xl font-bold mb-2">Latest News & Announcements</h1>
+      <p class="text-xl opacity-90 max-w-2xl">Stay updated with the latest news, announcements, and updates from AJKPSC</p>
+    </div>
+    
+    <!-- News Statistics Bar -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <div class="bg-white rounded-xl shadow-md p-6 flex items-center">
+        <div class="rounded-full bg-blue-100 p-3 mr-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500 font-medium">News Articles</p>
+          <p class="text-2xl font-bold">{newsItems.length}</p>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-xl shadow-md p-6 flex items-center">
+        <div class="rounded-full bg-green-100 p-3 mr-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500 font-medium">Announcements</p>
+          <p class="text-2xl font-bold">{newsItems.filter(item => item.category === "Announcement").length}</p>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-xl shadow-md p-6 flex items-center">
+        <div class="rounded-full bg-purple-100 p-3 mr-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500 font-medium">Latest Update</p>
+          <p class="text-2xl font-bold">Today</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Featured News -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">Featured News</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {newsItems.filter(item => item.featured).map(news => (
+          <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-200 border border-gray-100 flex flex-col">
+            <div class="relative h-48 bg-gray-200">
+              <img 
+                src={news.image} 
+                alt={news.title}
+                class="w-full h-full object-cover"
+                onerror="this.src='https://via.placeholder.com/400x200?text=AJKPSC+News'"
+              />
+              <div class="absolute top-4 left-4">
+                <span class="px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">
+                  {news.category}
+                </span>
+              </div>
+            </div>
+            <div class="p-6 flex-grow">
+              <p class="text-sm text-gray-500 mb-2">{news.date}</p>
+              <h3 class="text-xl font-bold mb-3 text-gray-800">{news.title}</h3>
+              <p class="text-gray-600 mb-4">{news.summary}</p>
+            </div>
+            <div class="px-6 pb-6">
+              <a href={`/news/${news.id}`} class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                Read More
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Recent News List -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">Recent News & Updates</h2>
+      
+      <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="divide-y divide-gray-200">
+          {newsItems.filter(item => !item.featured).map(news => (
+            <div class="p-6 hover:bg-gray-50 transition-colors">
+              <div class="flex flex-col md:flex-row md:items-center">
+                <div class="md:flex-1">
+                  <div class="flex items-center mb-2">
+                    <span class="px-2.5 py-0.5 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
+                      {news.category}
+                    </span>
+                    <span class="text-sm text-gray-500 ml-3">{news.date}</span>
+                  </div>
+                  <h3 class="text-lg font-bold mb-2 text-gray-800">{news.title}</h3>
+                  <p class="text-gray-600 mb-4 md:mb-0">{news.summary}</p>
+                </div>
+                <div class="md:ml-4">
+                  <a href={`/news/${news.id}`} class="inline-flex items-center justify-center px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
+                    Read More
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    
+    <!-- News Categories -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">News Categories</h2>
+      
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <a href="/news/category/announcements" class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition-all duration-200 border border-gray-100">
+          <div class="rounded-full bg-blue-100 p-3 mb-3 mx-auto w-14 h-14 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+            </svg>
+          </div>
+          <h3 class="font-medium text-gray-800">Announcements</h3>
+        </a>
+        
+        <a href="/news/category/results" class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition-all duration-200 border border-gray-100">
+          <div class="rounded-full bg-green-100 p-3 mb-3 mx-auto w-14 h-14 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="font-medium text-gray-800">Results</h3>
+        </a>
+        
+        <a href="/news/category/schedules" class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition-all duration-200 border border-gray-100">
+          <div class="rounded-full bg-purple-100 p-3 mb-3 mx-auto w-14 h-14 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="font-medium text-gray-800">Schedules</h3>
+        </a>
+        
+        <a href="/news/category/notifications" class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition-all duration-200 border border-gray-100">
+          <div class="rounded-full bg-red-100 p-3 mb-3 mx-auto w-14 h-14 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </div>
+          <h3 class="font-medium text-gray-800">Notifications</h3>
+        </a>
+        
+        <a href="/news/category/updates" class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition-all duration-200 border border-gray-100">
+          <div class="rounded-full bg-yellow-100 p-3 mb-3 mx-auto w-14 h-14 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h3 class="font-medium text-gray-800">Updates</h3>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Newsletter Section -->
+    <div class="mt-12 bg-blue-50 rounded-xl p-8">
+      <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="rounded-full bg-blue-100 p-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-xl font-bold mb-2">Subscribe to News Updates</h3>
+          <p class="text-gray-600 mb-4">Get the latest news, announcements, and updates from AJKPSC delivered directly to your inbox.</p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <input type="email" placeholder="Enter your email address" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg">
+            <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Subscribe Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
