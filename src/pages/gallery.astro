@@ -1,0 +1,40 @@
+---
+
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+
+// You can add more dummy images as needed
+const images = [
+    "https://picsum.photos/400/300",
+    "https://picsum.photos/401/300",
+    "https://picsum.photos/402/300",
+    "https://picsum.photos/403/300",
+    "https://picsum.photos/404/300",
+    "https://picsum.photos/405/300",
+    "https://picsum.photos/406/300",
+    "https://picsum.photos/407/300",
+    "https://picsum.photos/408/300",
+];
+---
+
+<Layout seo={{ title: "gallery" }}>
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-8 text-center">Our Gallery</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {
+                images.map((image) => (
+                    <div class="overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <Image
+                            src={image}
+                            alt="Gallery image"
+                            width={400}
+                            loading={"lazy"}
+                            height={300}
+                            class="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</Layout>

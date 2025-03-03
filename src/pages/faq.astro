@@ -1,0 +1,67 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+
+const faqs = [
+    {
+        question: "What is AJKPSC?",
+        answer: "AJKPSC (Azad Jammu and Kashmir Public Service Commission) is responsible for recruiting civil servants and public officials in AJK."
+    },
+    {
+        question: "How can I apply for AJKPSC examinations?",
+        answer: "You can apply through our official website when positions are advertised. Make sure to check eligibility criteria and submission deadlines."
+    },
+    {
+        question: "What documents are required for application?",
+        answer: "Typically required documents include CNIC, educational certificates, domicile, and passport-sized photographs. Specific requirements vary by position."
+    },
+    {
+        question: "How long does the selection process take?",
+        answer: "The selection process duration varies depending on the position and number of applicants. Generally, it may take several months from application to final selection."
+    }
+];
+---
+
+<Layout seo={{ title: "FAQ - AJKPSC" }}>
+    <div class="max-w-4xl mx-auto px-4 py-12 ">
+        <h1 class="text-4xl font-bold text-center mb-12 text-gray-800">
+            Frequently Asked Questions
+        </h1>
+        
+        <div class="space-y-4">
+            {faqs.map((faq, index) => (
+                <details class="group bg-white rounded-lg shadow-md">
+                    <summary class="flex items-center justify-between cursor-pointer p-6">
+                        <h3 class="text-xl font-medium text-gray-900">
+                            {faq.question}
+                        </h3>
+                        <span class="ml-6 flex-shrink-0">
+                            <svg class="w-6 h-6 text-gray-500 group-open:rotate-180 transition-transform duration-200" 
+                                fill="none" 
+                                viewBox="0 0 24 24" 
+                                stroke="currentColor">
+                                <path stroke-linecap="round" 
+                                    stroke-linejoin="round" 
+                                    stroke-width="2" 
+                                    d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-gray-600">
+                        {faq.answer}
+                    </div>
+                </details>
+            ))}
+        </div>
+    </div>
+</Layout>
+
+<style>
+    details {
+        transition: all 0.3s ease;
+    }
+    
+    details:hover {
+        transform: translateY(-2px);
+    }
+</style>
