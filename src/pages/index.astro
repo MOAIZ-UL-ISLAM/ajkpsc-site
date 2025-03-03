@@ -2,22 +2,19 @@
 import Activities from '../components/Activities.astro';
 import Announcements from '../components/Announcements.astro';
 import Chairperson from '../components/Chairperson.astro';
-import Navbar from '../components/Navbar.astro';
-import TopBar from '../components/TopBar.astro';
+
 import Layout from '../layouts/Layout.astro';
 import Contacts from '../components/Contacts.astro';
-import Footer from '../components/Footer.astro';
+
 import Hero from '../components/Hero.astro';
 
 ---
 
-<Layout>
-	<TopBar/>
-	 <Navbar />
+<Layout seo={{title: "AJKPSC | Public Service Commission of Azad Jammu and Kashmir"}}>
 	 <Hero/>
 	 <Chairperson />
 	 <Announcements />
 	 <Activities />
 	 <Contacts />
-	 <Footer />
+	
 </Layout>

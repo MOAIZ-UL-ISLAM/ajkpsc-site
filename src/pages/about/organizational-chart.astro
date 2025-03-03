@@ -1,0 +1,13 @@
+---
+import Image from "astro/components/Image.astro";
+import Layout from "../../layouts/Layout.astro";
+import AjkPsc from "../../assets/AjkPsc.png";
+---
+
+<Layout seo={{ title: "Organizational Chart" }}>
+    <div class="p-12 flex flex-col items-center justify-center">
+        <h1 class="text-4xl font-bold pt-1 text-center mb-12 text-gray-800">Organizational Chart</h1>
+
+        <Image src={AjkPsc} height={800} alt="Organizational Chart" class='border border-b-black' />
+    </div>
+</Layout>

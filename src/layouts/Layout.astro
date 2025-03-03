@@ -1,11 +1,23 @@
 ---
+import { SEO, type Props as SEOprops } from "astro-seo";
 import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import TopBar from "../components/TopBar.astro";
+import Footer from "../components/Footer.astro";
+const { seo } = Astro.props;
+
+interface Props {
+  seo?: SEOprops;
+}
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta name="google-site-verification" content="f3zA7ibAQ5iBDjxYYCsYL6mhPF9dMmV5ZcOY2wJE-bM" />
+    <meta
+      name="google-site-verification"
+      content="f3zA7ibAQ5iBDjxYYCsYL6mhPF9dMmV5ZcOY2wJE-bM"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,10 +28,16 @@ import "../styles/global.css";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/logo.png" />
     <meta name="generator" content={Astro.generator} />
-    <title>AJKPSC | Public Service Commision of AJK</title>
+    <SEO
+      {...seo}
+      title={seo?.title ?? "AJKPSC | Public Service Commission of Azad Jammu and Kashmir"}
+      description=" AJK Public Service Commission is an independent agency that recruits civil servants for the government of Azad Jammu and Kashmir."
+    />
   </head>
   <body>
-    
+    <TopBar />
+    <Navbar />
     <slot />
+    <Footer />
   </body>
 </html>
