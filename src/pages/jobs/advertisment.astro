@@ -1,0 +1,82 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+
+interface Advertisement {
+    title: string;
+    date: string;
+    downloadUrl: string;
+}
+
+
+const advertisements: Advertisement[] = [
+    { title: "Job Advertisement 2-2024", date: "2024", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-/2024 (Revised)", date: "2024", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.4-/2022", date: "2022", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement 3-2022", date: "2022", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement 2-2022", date: "2022", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-/2022", date: "2022", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.2-/2021", date: "2021", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-2021", date: "2021", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-2020", date: "2020", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.3-/2019", date: "2019", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.2-2019", date: "2019", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-2019", date: "2019", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.7-/2018", date: "2018", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.6-/2018", date: "2018", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.5-/2018", date: "2018", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.4-/2018", date: "2018", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-/2018", date: "2018", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.2-/2018", date: "2018", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.3-/2017", date: "2017", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.3-/2018", date: "2018", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.2-/2017", date: "2017", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.2-/2016", date: "2016", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-/2017", date: "2017", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.3-/2016", date: "2016", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-/2016", date: "2016", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-/2015", date: "2015", downloadUrl: "/path-to-file.pdf" },
+    { title: "Advertisement for Assistant B-14, Stenographer B-14, Data Entry Operator B-12", date: "2015", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-/2014 Ammended", date: "2014", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.2-/2014", date: "2014", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-/2014", date: "2014", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.2-/2013", date: "2013", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-/2013", date: "2013", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-/2012", date: "2012", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.3-/2011", date: "2011", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.2-/2011", date: "2011", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-/2011", date: "2011", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.2-/2010", date: "2010", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-/2010", date: "2010", downloadUrl: "/path-to-file.pdf" },
+    { title: "Job Advertisement no.1-/2009", date: "2009", downloadUrl: "/path-to-file.pdf" }
+];
+---
+
+<Layout seo={{ title: "Job Advertisements" }}>
+<div class="container mx-auto p-8">
+    <h1 class="text-3xl font-bold mb-6">Job Advertisements</h1>
+    <table class="w-full border-collapse">
+        <thead>
+            <tr class="bg-gray-100">
+                <th class="border p-3 text-left">Advertisement Title</th>
+                <th class="border p-3 text-left">Date</th>
+                <th class="border p-3 text-left">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {advertisements.map((ad) => (
+                <tr>
+                    <td class="border p-3">{ad.title}</td>
+                    <td class="border p-3">{ad.date}</td>
+                    <td class="border p-3">
+                        <a href={ad.downloadUrl} class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 inline-flex items-center">
+                            <Icon name="mdi:download"  title="download advertisment" size={20} class='mr-2' />
+                            Download
+                        </a>
+                    </td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
+</div>
+</Layout>

@@ -1,0 +1,67 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout seo={{ title: "Sitemap" }}>
+    <div class="container mx-auto p-8 max-w-5xl">
+        <h1 class="text-4xl font-bold mb-8 text-center text-gray-800 border-b pb-4">Site Navigation</h1>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Home Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <h2 class="text-xl font-semibold mb-4 text-gray-700">
+                    <a href="/" class="hover:text-blue-600">Home</a>
+                </h2>
+            </div>
+
+            <!-- About Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <h2 class="text-xl font-semibold mb-4 text-gray-700">
+                    <a href="/about" class="hover:text-blue-600">About Us</a>
+                </h2>
+                <ul class="space-y-2">
+                    <li><a href="/about" class="text-gray-600 hover:text-blue-600 transition-colors">About PSC</a></li>
+                    <li><a href="/about/mission" class="text-gray-600 hover:text-blue-600 transition-colors">Commission Composition</a></li>
+                    <li><a href="/about/ex-chairmen" class="text-gray-600 hover:text-blue-600 transition-colors">Ex Chairman AJKPSC</a></li>
+                    <li><a href="/about/organizational-chart" class="text-gray-600 hover:text-blue-600 transition-colors">Organization Structure</a></li>
+                </ul>
+            </div>
+
+            <!-- News Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <h2 class="text-xl font-semibold mb-4 text-gray-700">
+                    <a href="/news/latest-news" class="hover:text-blue-600">News</a>
+                </h2>
+                <ul class="space-y-2">
+                    <li><a href="/news/latest-news" class="text-gray-600 hover:text-blue-600 transition-colors">Latest News</a></li>
+                    <li><a href="/news/schedule" class="text-gray-600 hover:text-blue-600 transition-colors">Schedule</a></li>
+                    <li><a href="/news/policy" class="text-gray-600 hover:text-blue-600 transition-colors">Policy</a></li>
+                </ul>
+            </div>
+
+            <!-- Downloads Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <h2 class="text-xl font-semibold mb-4 text-gray-700">
+                    <a href="/downloads/sample-papers" class="hover:text-blue-600">Downloads</a>
+                </h2>
+                <ul class="space-y-2">
+                    <li><a href="/downloads/syllabus" class="text-gray-600 hover:text-blue-600 transition-colors">Syllabus</a></li>
+                    <li><a href="/downloads/sample-papers" class="text-gray-600 hover:text-blue-600 transition-colors">Sample Papers</a></li>
+                    <li><a href="/downloads/application-form" class="text-gray-600 hover:text-blue-600 transition-colors">Application Form</a></li>
+                    <li><a href="/downloads/tenders" class="text-gray-600 hover:text-blue-600 transition-colors">Tenders</a></li>
+                </ul>
+            </div>
+
+            <!-- Quick Links Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <h2 class="text-xl font-semibold mb-4 text-gray-700">Quick Links</h2>
+                <ul class="space-y-2">
+                    <li><a href="/jobs/advertisment" class="text-gray-600 hover:text-blue-600 transition-colors">Jobs</a></li>
+                    <li><a href="/contact" class="text-gray-600 hover:text-blue-600 transition-colors">Contact</a></li>
+                    <li><a href="/faq" class="text-gray-600 hover:text-blue-600 transition-colors">FAQs</a></li>
+                    <li><a href="/gallery" class="text-gray-600 hover:text-blue-600 transition-colors">Gallery</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</Layout>
