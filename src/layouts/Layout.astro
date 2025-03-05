@@ -29,9 +29,15 @@ interface Props {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/logo.png" />
     <meta name="generator" content={Astro.generator} />
+    <title>AJKPSC | Public Service Commission of AJK</title>
+    <meta
+      name="description"
+      content="Official website of AJKPSC. Find the latest job openings, exam schedules, interview results, and document verification details."
+    />
     <SEO
       {...seo}
-      title={seo?.title ?? "AJKPSC | Public Service Commission of Azad Jammu and Kashmir"}
+      title={seo?.title ??
+        "AJKPSC | Public Service Commission of Azad Jammu and Kashmir"}
       description=" AJK Public Service Commission is an independent agency that recruits civil servants for the government of Azad Jammu and Kashmir."
     />
   </head>
