@@ -1,0 +1,152 @@
+---
+// Suggestion.astro
+
+interface SuggestionData {
+    rating: number;
+    suggestion: string;
+}
+
+let suggestionCount = 0; // This would typically be stored in a database
+---
+
+<div id="suggestion-modal" class="hidden">
+    <div class="modal-content">
+        <h2>We Value Your Feedback!</h2>
+        <div class="star-rating">
+            <span class="star" data-rating="1">★</span>
+            <span class="star" data-rating="2">★</span>
+            <span class="star" data-rating="3">★</span>
+            <span class="star" data-rating="4">★</span>
+            <span class="star" data-rating="5">★</span>
+        </div>
+        <textarea id="suggestion-text" placeholder="Please share your suggestions..."></textarea>
+        <button id="submit-suggestion">Submit Feedback</button>
+        <p>Total suggestions received: <span id="suggestion-count">{suggestionCount}</span></p>
+    </div>
+</div>
+
+<style>
+    #suggestion-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        max-width: 500px;
+        width: 90%;
+    }
+
+    .star-rating {
+        margin: 1rem 0;
+    }
+
+    .star {
+        font-size: 2rem;
+        color: #ccc;
+        cursor: pointer;
+    }
+
+    .star.active {
+        color: gold;
+    }
+
+    textarea {
+        width: 100%;
+        min-height: 100px;
+        margin: 1rem 0;
+        padding: 0.5rem;
+    }
+
+    button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+</style>
+
+<script>
+    let currentRating = 0;
+
+    // Show modal after 15 seconds
+    setTimeout(() => {
+        const modal = document.getElementById('suggestion-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+        }
+    }, 15000);
+
+    // Star rating functionality
+    const stars = document.querySelectorAll('.star');
+    stars.forEach(star => {
+        star.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            const rating = parseInt(target.getAttribute('data-rating') || '0');
+            currentRating = rating;
+            
+            stars.forEach(s => {
+                const starRating = parseInt(s.getAttribute('data-rating') || '0');
+                if (starRating <= rating) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+        });
+    });
+
+    // Submit functionality
+    const submitButton = document.getElementById('submit-suggestion');
+    const suggestionText = document.getElementById('suggestion-text') as HTMLTextAreaElement;
+    const suggestionCountElement = document.getElementById('suggestion-count');
+
+    submitButton?.addEventListener('click', async () => {
+        if (currentRating === 0 || !suggestionText.value.trim()) {
+            alert('Please provide both a rating and suggestion.');
+            return;
+        }
+
+        const suggestionData: SuggestionData = {
+            rating: currentRating,
+            suggestion: suggestionText.value
+        };
+
+        try {
+            // Here you would typically send the data to your backend
+            console.log('Suggestion submitted:', suggestionData);
+            
+            // Update suggestion count (this should be handled by your backend)
+            if (suggestionCountElement) {
+                const currentCount = parseInt(suggestionCountElement.textContent || '0');
+                suggestionCountElement.textContent = (currentCount + 1).toString();
+            }
+
+            // Reset form
+            suggestionText.value = '';
+            stars.forEach(s => s.classList.remove('active'));
+            currentRating = 0;
+
+            alert('Thank you for your feedback!');
+        } catch (error) {
+            console.error('Error submitting suggestion:', error);
+            alert('There was an error submitting your feedback. Please try again.');
+        }
+    });
+</script>
